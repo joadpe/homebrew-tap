@@ -68,7 +68,7 @@ class Jsrc < Formula
       #!/bin/bash
       export JAVA_HOME="#{Formula["openjdk"].opt_prefix}"
       exec "$JAVA_HOME/bin/java" --enable-native-access=ALL-UNNAMED \\
-        -Xmx1g \\
+        -Xmx2g \\
         -Djava.library.path="#{lib}" \\
         -jar "#{libexec}/jsrc.jar" "$@"
     EOS
