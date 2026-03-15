@@ -23,6 +23,9 @@ class Jsrc < Formula
       system "make", "-j#{ENV.make_jobs}"
       if OS.mac?
         lib.install "libtree-sitter.dylib"
+        # Fix install name so dependents can find it
+        system "install_name_tool", "-id", "#{lib}/libtree-sitter.dylib",
+               "#{lib}/libtree-sitter.dylib"
       else
         lib.install "libtree-sitter.so"
       end
@@ -36,8 +39,19 @@ class Jsrc < Formula
         system ENV.cc, "-dynamiclib", "-fPIC",
                "-I#{buildpath}/ts-include",
                "-L#{lib}", "-ltree-sitter",
+               "-install_name", "#{lib}/libtree-sitter-java.dylib",
                "-o", "libtree-sitter-java.dylib", "src/parser.c"
         lib.install "libtree-sitter-java.dylib"
+        # Fix the reference to libtree-sitter to use absolute path
+        system "install_name_tool",
+               "-change", "/usr/local/lib/libtree-sitter.0.24.dylib",
+               "#{lib}/libtree-sitter.dylib",
+               "#{lib}/libtree-sitter-java.dylib"
+        # Also fix any versioned references
+        system "install_name_tool",
+               "-change", "/usr/local/lib/libtree-sitter.dylib",
+               "#{lib}/libtree-sitter.dylib",
+               "#{lib}/libtree-sitter-java.dylib"
       else
         system ENV.cc, "-shared", "-fPIC",
                "-I#{buildpath}/ts-include",
