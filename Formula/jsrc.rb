@@ -34,11 +34,15 @@ class Jsrc < Formula
     resource("tree-sitter-java").stage do
       if OS.mac?
         system ENV.cc, "-dynamiclib", "-fPIC",
-               "-I#{buildpath}/ts-include", "-o", "libtree-sitter-java.dylib", "src/parser.c"
+               "-I#{buildpath}/ts-include",
+               "-L#{lib}", "-ltree-sitter",
+               "-o", "libtree-sitter-java.dylib", "src/parser.c"
         lib.install "libtree-sitter-java.dylib"
       else
         system ENV.cc, "-shared", "-fPIC",
-               "-I#{buildpath}/ts-include", "-o", "libtree-sitter-java.so", "src/parser.c"
+               "-I#{buildpath}/ts-include",
+               "-L#{lib}", "-ltree-sitter",
+               "-o", "libtree-sitter-java.so", "src/parser.c"
         lib.install "libtree-sitter-java.so"
       end
     end
