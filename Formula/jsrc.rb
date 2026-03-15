@@ -8,8 +8,8 @@ class Jsrc < Formula
   depends_on "openjdk"
 
   resource "tree-sitter" do
-    url "https://github.com/tree-sitter/tree-sitter/archive/refs/tags/v0.24.7.tar.gz"
-    sha256 "7cbc13c974d6abe978cafc9da12d1e79e07e365c42af75e43ec1b5cdc03ed447"
+    url "https://github.com/tree-sitter/tree-sitter/archive/refs/tags/v0.25.6.tar.gz"
+    sha256 "ac6ed919c6d849e8553e246d5cd3fa22661f6c7b6497299264af433f3629957c"
   end
 
   resource "tree-sitter-java" do
@@ -42,16 +42,15 @@ class Jsrc < Formula
                "-install_name", "#{lib}/libtree-sitter-java.dylib",
                "-o", "libtree-sitter-java.dylib", "src/parser.c"
         lib.install "libtree-sitter-java.dylib"
-        # Fix the reference to libtree-sitter to use absolute path
-        system "install_name_tool",
-               "-change", "/usr/local/lib/libtree-sitter.0.24.dylib",
-               "#{lib}/libtree-sitter.dylib",
-               "#{lib}/libtree-sitter-java.dylib"
-        # Also fix any versioned references
-        system "install_name_tool",
-               "-change", "/usr/local/lib/libtree-sitter.dylib",
-               "#{lib}/libtree-sitter.dylib",
-               "#{lib}/libtree-sitter-java.dylib"
+        # Fix references to libtree-sitter to use absolute Cellar path
+        # The make build may embed various versioned names
+        ["libtree-sitter.0.25.dylib", "libtree-sitter.0.24.dylib",
+         "libtree-sitter.dylib"].each do |old_name|
+          system "install_name_tool",
+                 "-change", "/usr/local/lib/#{old_name}",
+                 "#{lib}/libtree-sitter.dylib",
+                 "#{lib}/libtree-sitter-java.dylib"
+        end
       else
         system ENV.cc, "-shared", "-fPIC",
                "-I#{buildpath}/ts-include",
