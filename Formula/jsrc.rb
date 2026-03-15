@@ -5,7 +5,7 @@ class Jsrc < Formula
   sha256 "07405e27129246b34772b9c1526fd49a23f9b61a8f1ced2de36d1400981a0639"
   license "MIT"
 
-  depends_on "openjdk@22"
+  depends_on "openjdk"
 
   resource "tree-sitter" do
     url "https://github.com/tree-sitter/tree-sitter/archive/refs/tags/v0.24.7.tar.gz"
@@ -49,7 +49,7 @@ class Jsrc < Formula
     # Create wrapper script
     (bin/"jsrc").write <<~EOS
       #!/bin/bash
-      export JAVA_HOME="#{Formula["openjdk@22"].opt_prefix}"
+      export JAVA_HOME="#{Formula["openjdk"].opt_prefix}"
       exec "$JAVA_HOME/bin/java" --enable-native-access=ALL-UNNAMED \\
         -Djava.library.path="#{lib}" \\
         -jar "#{libexec}/jsrc.jar" "$@"
