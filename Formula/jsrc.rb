@@ -9,12 +9,12 @@ class Jsrc < Formula
 
   resource "tree-sitter" do
     url "https://github.com/tree-sitter/tree-sitter/archive/refs/tags/v0.25.6.tar.gz"
-    sha256 "4ff35927b0147d07d21f87e3360022b2752bc7960c0d9eecdde20354bf1338d1"
+    sha256 "ac6ed919c6d849e8553e246d5cd3fa22661f6c7b6497299264af433f3629957c"
   end
 
   resource "tree-sitter-java" do
     url "https://github.com/tree-sitter/tree-sitter-java/archive/refs/tags/v0.23.5.tar.gz"
-    sha256 "4ff35927b0147d07d21f87e3360022b2752bc7960c0d9eecdde20354bf1338d1"
+    sha256 "cb199e0faae4b2c08425f88cbb51c1a9319612e7b96315a174a624db9bf3d9f0"
   end
 
   def install
