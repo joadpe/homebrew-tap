@@ -2,7 +2,7 @@ class Jsrc < Formula
   desc "Java source code navigator and analyzer — CLI for codebase exploration"
   homepage "https://github.com/joadpe/jsrc"
   url "https://github.com/joadpe/jsrc/releases/download/v1.0.12/jsrc.jar"
-  sha256 "f2a25bb30ab6a10a29a970edfc351b89d75b111b00df326fd2f96b24591b707f"
+  sha256 "eecb5cec67c12324ac94a97e4fcdc0826cf8fc4a27248aa318bdf86328a070c1"
   license "MIT"
 
   depends_on "openjdk"
