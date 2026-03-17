@@ -2,19 +2,19 @@ class Jsrc < Formula
   desc "Java source code navigator and analyzer — CLI for codebase exploration"
   homepage "https://github.com/joadpe/jsrc"
   url "https://github.com/joadpe/jsrc/releases/download/v1.0.12/jsrc.jar"
-  sha256 "d422158861d1e68136f0f7bc3a6eab04f268944e336049711d15a4fccf907e63"
+  sha256 "6fe7f9c3d6e2961f4db28f128d75198345aa5284f216b2f4560dedf8ff1eecbd"
   license "MIT"
 
   depends_on "openjdk"
 
   resource "tree-sitter" do
     url "https://github.com/tree-sitter/tree-sitter/archive/refs/tags/v0.25.6.tar.gz"
-    sha256 "ac6ed919c6d849e8553e246d5cd3fa22661f6c7b6497299264af433f3629957c"
+    sha256 "6fe7f9c3d6e2961f4db28f128d75198345aa5284f216b2f4560dedf8ff1eecbd"
   end
 
   resource "tree-sitter-java" do
     url "https://github.com/tree-sitter/tree-sitter-java/archive/refs/tags/v0.23.5.tar.gz"
-    sha256 "cb199e0faae4b2c08425f88cbb51c1a9319612e7b96315a174a624db9bf3d9f0"
+    sha256 "6fe7f9c3d6e2961f4db28f128d75198345aa5284f216b2f4560dedf8ff1eecbd"
   end
 
   def install
